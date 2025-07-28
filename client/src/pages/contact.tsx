@@ -119,14 +119,14 @@ export default function Contact() {
             {/* Google Maps Embed */}
             <div className="rounded-xl overflow-hidden shadow-lg">
               <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3262.5!2d-106.6!3d35.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzXCsDA2JzAwLjAiTiAxMDbCsDM2JzAwLjAiVw!5e0!3m2!1sen!2sus!4v1234567890" 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3265.0985775437773!2d-106.71659992500493!3d35.15166607260616!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8718515b66db2b75%3A0x7e8c6c1c8c8c8c8c!2s2105%20Vista%20Oeste%20St%20NW%2C%20Albuquerque%2C%20NM%2087120%2C%20USA!5e0!3m2!1sen!2sus!4v1624567890123" 
                 width="100%" 
                 height="300" 
                 style={{ border: 0 }} 
                 allowFullScreen 
                 loading="lazy" 
                 referrerPolicy="no-referrer-when-downgrade"
-                title="AccredCert Office Location"
+                title="AccredCert Office Location - 2105 Vista Oeste St NW, Albuquerque, NM"
               />
             </div>
           </div>

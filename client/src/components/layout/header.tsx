@@ -3,6 +3,7 @@ import { Link, useLocation } from "wouter";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import logoPath from "@/assets/logo.png";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -27,8 +28,12 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
-            <Link href="/" className="text-2xl font-bold text-white hover:text-gray-200 transition-colors">
-              AccredCert
+            <Link href="/" className="flex items-center hover:opacity-80 transition-opacity">
+              <img 
+                src={logoPath} 
+                alt="AccredCert Logo" 
+                className="h-8 w-auto"
+              />
             </Link>
           </div>
 

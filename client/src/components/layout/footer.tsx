@@ -30,7 +30,7 @@ export default function Footer() {
 
           {/* Services */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">Services</h4>
+            <h4 className="text-lg font-semibold mb-4 text-green-400">Services</h4>
             <ul className="space-y-2">
               <li><Link href="/services" className="text-gray-300 hover:text-white transition duration-300">FDA Registration</Link></li>
               <li><Link href="/services" className="text-gray-300 hover:text-white transition duration-300">FSVP Agent</Link></li>
@@ -42,7 +42,7 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
+            <h4 className="text-lg font-semibold mb-4 text-green-400">Quick Links</h4>
             <ul className="space-y-2">
               <li><Link href="/about" className="text-gray-300 hover:text-white transition duration-300">About Us</Link></li>
               <li><Link href="/services" className="text-gray-300 hover:text-white transition duration-300">Our Services</Link></li>
@@ -54,7 +54,7 @@ export default function Footer() {
 
           {/* Contact Info */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">Contact Info</h4>
+            <h4 className="text-lg font-semibold mb-4 text-green-400">Contact Info</h4>
             <div className="space-y-3 text-gray-300">
               <div className="flex items-start">
                 <MapPin className="mt-1 mr-3 flex-shrink-0" size={16} />

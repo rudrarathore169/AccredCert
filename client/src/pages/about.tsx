@@ -151,9 +151,11 @@ export default function About() {
             <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white">
               Contact Our Team
             </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-black">
-              View Our Services
-            </Button>
+            <Link href="/services">
+              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-black">
+                View Our Services
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
