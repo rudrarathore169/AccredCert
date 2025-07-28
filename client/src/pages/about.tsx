@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "wouter";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Award, Users, Globe, ChevronDown, ChevronUp } from "lucide-react";
@@ -148,9 +149,11 @@ export default function About() {
             Let our certified experts help you navigate the complex world of regulatory compliance.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white">
-              Contact Our Team
-            </Button>
+            <Link href="/contact">
+              <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white">
+                Contact Our Team
+              </Button>
+            </Link>
             <Link href="/services">
               <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-black">
                 View Our Services
