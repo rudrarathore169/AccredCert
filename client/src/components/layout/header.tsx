@@ -12,7 +12,7 @@ export default function Header() {
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/services", label: "Services" },
-    { href: "/verification", label: "Verify Certificate" },
+    { href: "/verification", label: "Certificate Verification" },
     { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
     { href: "/blog", label: "Blog" },
@@ -46,18 +46,13 @@ export default function Header() {
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    "nav-link text-lg font-medium px-3 py-2 rounded-md transition-colors duration-200 hover:bg-gray-800",
+                    "text-lg font-medium px-4 py-3 rounded-md transition-colors duration-200 hover:bg-gray-800 whitespace-nowrap",
                     isActiveLink(link.href) ? "bg-gray-800 text-white" : "text-gray-300 hover:text-white"
                   )}
                 >
                   {link.label}
                 </Link>
               ))}
-              <Link href="/admin">
-                <Button className="bg-blue-600 hover:bg-blue-700 text-white text-lg px-4 py-2">
-                  Admin Panel
-                </Button>
-              </Link>
             </div>
           </div>
 
@@ -92,13 +87,6 @@ export default function Header() {
                 {link.label}
               </Link>
             ))}
-            <Link
-              href="/admin"
-              className="block px-4 py-3 rounded-md text-lg font-medium bg-blue-600 hover:bg-blue-700 transition-colors text-white"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Admin Panel
-            </Link>
           </div>
         </div>
       )}
