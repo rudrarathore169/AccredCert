@@ -26,34 +26,35 @@ export default function Header() {
   return (
     <nav className="bg-black text-white shadow-lg sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <div className="flex items-center">
+        <div className="flex justify-between items-center h-20 md:h-16">
+          {/* Mobile: Center logo, Desktop: Left align */}
+          <div className="flex items-center md:flex-none flex-1 justify-center md:justify-start order-2 md:order-1">
             <Link href="/" className="flex items-center hover:opacity-80 transition-opacity">
               <img 
                 src={logoPath} 
                 alt="AccredCert Logo" 
-                className="h-8 w-auto"
+                className="h-12 md:h-10 w-auto"
               />
             </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:block">
+          <div className="hidden md:block order-3 md:order-2">
             <div className="ml-10 flex items-baseline space-x-8">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    "nav-link",
-                    isActiveLink(link.href) ? "bg-gray-800" : ""
+                    "nav-link text-lg font-medium px-3 py-2 rounded-md transition-colors duration-200 hover:bg-gray-800",
+                    isActiveLink(link.href) ? "bg-gray-800 text-white" : "text-gray-300 hover:text-white"
                   )}
                 >
                   {link.label}
                 </Link>
               ))}
               <Link href="/admin">
-                <Button className="bg-blue-600 hover:bg-blue-700 text-white">
+                <Button className="bg-blue-600 hover:bg-blue-700 text-white text-lg px-4 py-2">
                   Admin Panel
                 </Button>
               </Link>
@@ -61,14 +62,14 @@ export default function Header() {
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="md:hidden order-1 md:order-3">
             <Button
               variant="ghost"
-              size="sm"
+              size="lg"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-white hover:bg-gray-800"
+              className="text-white hover:bg-gray-800 p-3"
             >
-              {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+              {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
             </Button>
           </div>
         </div>
@@ -77,14 +78,14 @@ export default function Header() {
       {/* Mobile Navigation */}
       {isMobileMenuOpen && (
         <div className="md:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-gray-900">
+          <div className="px-4 pt-4 pb-6 space-y-3 bg-gray-900">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700 transition-colors",
-                  isActiveLink(link.href) ? "bg-gray-700" : ""
+                  "block px-4 py-3 rounded-md text-lg font-medium hover:bg-gray-700 transition-colors",
+                  isActiveLink(link.href) ? "bg-gray-700 text-white" : "text-gray-300 hover:text-white"
                 )}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
@@ -93,7 +94,7 @@ export default function Header() {
             ))}
             <Link
               href="/admin"
-              className="block px-3 py-2 rounded-md text-base font-medium bg-blue-600 hover:bg-blue-700 transition-colors"
+              className="block px-4 py-3 rounded-md text-lg font-medium bg-blue-600 hover:bg-blue-700 transition-colors text-white"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Admin Panel
