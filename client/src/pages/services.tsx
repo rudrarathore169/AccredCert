@@ -215,14 +215,6 @@ export default function Services() {
               </Card>
             ))}
           </div>
-        ) : error ? (
-          <div className="text-center py-12">
-            <p className="text-red-600">Error loading services. Please try again later.</p>
-          </div>
-        ) : displayServices.length === 0 ? (
-          <div className="text-center py-12">
-            <p className="text-gray-600">No services available for {selectedCountry}.</p>
-          </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {displayServices.map((service) => (

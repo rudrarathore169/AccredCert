@@ -170,7 +170,7 @@ export default function Home() {
               </Button>
             </Link>
             <Link href="/verification">
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-black">
+              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white text-black">
                 Verify Certificate
               </Button>
             </Link>

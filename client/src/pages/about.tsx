@@ -155,7 +155,7 @@ export default function About() {
               </Button>
             </Link>
             <Link href="/services">
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-black">
+              <Button size="lg" variant="outline" className="border-white text-white hover:bg-whit text-black">
                 View Our Services
               </Button>
             </Link>

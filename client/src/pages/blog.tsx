@@ -36,13 +36,8 @@ export default function Blog() {
               </Card>
             ))}
           </div>
-        ) : error ? (
-          <div className="text-center py-12">
-            <p className="text-red-600">Error loading blog posts. Please try again later.</p>
-          </div>
         ) : !blogPosts || blogPosts.length === 0 ? (
           <div className="text-center py-12">
-            <h3 className="text-2xl font-semibold text-gray-800 mb-4">No Articles Yet</h3>
             <p className="text-gray-600 mb-8">
               We're working on creating valuable content for you. Check back soon for the latest insights on compliance and regulations.
             </p>
