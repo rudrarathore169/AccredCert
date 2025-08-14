@@ -21,9 +21,9 @@ export default function Home() {
               Simplifying Global<br />
               <span className="brand-blue">Compliance</span>
             </h1>
-            <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-gray-200">
-              AccredCert is a trusted & US Govt. certified FDA agent specializing in global compliance solutions for manufacturers, distributors, and exporters.
-            </p>
+            <p className="text-2xl md:text-3xl mb-8 max-w-3xl mx-auto text-black font-bold">
+  AccredCert is a trusted &amp; US Govt. certified FDA agent specializing in global compliance solutions for manufacturers, distributors, and exporters.
+</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contact">
                 <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-8">
@@ -157,26 +157,34 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-black text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-bold mb-6">Ready to Simplify Your Compliance?</h2>
-          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            Get started with our expert compliance solutions today and ensure your products meet all regulatory requirements.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact">
-              <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white">
-                Contact Us Today
-              </Button>
-            </Link>
-            <Link href="/verification">
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white text-black">
-                Verify Certificate
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
+<div className="mt-1 mb-20 text-center bg-black rounded-2xl p-12 max-w-5xl mx-auto">
+  <h2 className="text-4xl font-bold mb-6 text-white">
+    Ready to Simplify Your Compliance?
+  </h2>
+
+  <p className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+    Get started with our expert compliance solutions today and ensure your
+    products meet all regulatory requirements.
+  </p>
+
+  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+    <Link href="/contact">
+      <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white">
+        Contact Us Today
+      </Button>
+    </Link>
+    <Link href="/verification">
+      <Button
+        size="lg"
+        variant="outline"
+        className="border-white text-blue hover:bg-white hover:text-black"
+      >
+        Verify Certificate
+      </Button>
+    </Link>
+  </div>
+</div>
+
     </div>
   );
 }
