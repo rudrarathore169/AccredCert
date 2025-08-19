@@ -49,12 +49,11 @@ export default function Services()  {
 
         {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {
-            console.log(`hell is here ${services[0]}`)
-          }
-          {services
-            .filter(service => service.country === selectedCountry)
-            .map(service => <ServiceCard key={service._id} service={service} />)}
+         {
+        services
+  .filter(service => service.country.toLowerCase() === selectedCountry.toLowerCase())
+  .map(service => <ServiceCard key={service._id} service={service} />)
+  }
         </div>
 
         {/* Contact CTA */}
