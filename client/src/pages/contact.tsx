@@ -11,7 +11,7 @@ import FileUpload from "@/components/ui/file-upload";
 import { MapPin, Phone, Mail } from "lucide-react";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
-
+import { useState } from "react";
 const contactSchema = z.object({
   name: z.string().min(1, "Name is required"),
   email: z.string().email("Invalid email format"),
@@ -24,6 +24,8 @@ type ContactFormData = z.infer<typeof contactSchema>;
 export default function Contact() {
   const { toast } = useToast();
 
+  const [uploadedFile, setUploadedFile] = useState<File | null>(null);
+
   const {
     register,
     handleSubmit,
@@ -34,8 +36,11 @@ export default function Contact() {
   });
 
   const contactMutation = useMutation({
-    mutationFn: async (data: ContactFormData) => {
-      const response = await apiRequest("POST", "/api/contact", data);
+    mutationFn: async (formData: FormData) => {
+      const response = await fetch("http://localhost:3000/user/contact", {
+        method: "POST",
+        body: formData, // Direct FormData
+      });
       return response.json();
     },
     onSuccess: () => {
@@ -45,7 +50,8 @@ export default function Contact() {
       });
       reset();
     },
-    onError: () => {
+    onError: (error) => {
+      console.log(error)
       toast({
         title: "Failed to Send Message",
         description: "There was an error sending your message. Please try again.",
@@ -55,13 +61,24 @@ export default function Contact() {
   });
 
   const onSubmit = (data: ContactFormData) => {
-    contactMutation.mutate(data);
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("email", data.email);
+    formData.append("subject", data.subject || "");
+    formData.append("message", data.message);
+
+    if (uploadedFile) {
+      formData.append("file", uploadedFile);
+    }
+
+    contactMutation.mutate(formData);
   };
 
-  const handleUploadSuccess = (fileId: string, filename: string) => {
+  const handleUploadSuccess = (file: File) => {
+    setUploadedFile(file);
     toast({
       title: "File Uploaded",
-      description: `${filename} has been uploaded successfully.`,
+      description: `${file.name} has been added to your message.`,
     });
   };
 
@@ -197,6 +214,17 @@ export default function Contact() {
                     )}
                   </div>
 
+                  {/* File Upload Portal */}
+             <Card className="bg-gray-50 border border-gray-100">
+              <CardContent className="p-8">
+                <h3 className="text-xl font-semibold text-black mb-6">Client Document Upload</h3>
+                <p className="text-gray-600 mb-6">
+                  Upload your documents securely for processing. Our team will review them and get back to you.
+                </p>
+                <FileUpload onFileSelect={(file) => setUploadedFile(file)} />
+              </CardContent>
+            </Card>
+
                   <Button
                     type="submit"
                     disabled={contactMutation.isPending}
@@ -208,16 +236,7 @@ export default function Contact() {
               </CardContent>
             </Card>
 
-            {/* File Upload Portal */}
-            <Card className="bg-gray-50 border border-gray-100">
-              <CardContent className="p-8">
-                <h3 className="text-xl font-semibold text-black mb-6">Client Document Upload</h3>
-                <p className="text-gray-600 mb-6">
-                  Upload your documents securely for processing. Our team will review them and get back to you.
-                </p>
-                <FileUpload onUploadSuccess={handleUploadSuccess} />
-              </CardContent>
-            </Card>
+            
           </div>
         </div>
 

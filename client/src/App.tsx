@@ -10,9 +10,9 @@ import Services from "@/pages/services";
 import Verification from "@/pages/verification";
 import About from "@/pages/about";
 import Contact from "@/pages/contact";
-import Admin from "@/pages/admin";
 import Blog from "@/pages/blog";
 import NotFound from "@/pages/not-found";
+import Service from "@/pages/service";
 
 function Router() {
   return (
@@ -25,8 +25,8 @@ function Router() {
           <Route path="/verification" component={Verification} />
           <Route path="/about" component={About} />
           <Route path="/contact" component={Contact} />
-          <Route path="/admin" component={Admin} />
           <Route path="/blog" component={Blog} />
+          <Route path="/service/:id" component={Service} />
           <Route component={NotFound} />
         </Switch>
       </main>
@@ -45,5 +45,4 @@ function App() {
     </QueryClientProvider>
   );
 }
-
 export default App;

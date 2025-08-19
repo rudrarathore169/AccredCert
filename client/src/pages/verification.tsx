@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { useMutation } from "@tanstack/react-query";
+import { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -9,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import CertificateResult from "@/components/ui/certificate-result";
 import { Search } from "lucide-react";
-import { apiRequest } from "@/lib/queryClient";
+import { AppContext } from "@/Context";
 import { useToast } from "@/hooks/use-toast";
 
 const verificationSchema = z.object({
@@ -21,48 +20,45 @@ const verificationSchema = z.object({
 type VerificationFormData = z.infer<typeof verificationSchema>;
 
 export default function Verification() {
-  const [verificationResult, setVerificationResult] = useState(null);
+  const { certificates } = useContext(AppContext);
+  const [verificationResult, setVerificationResult] = useState<any>(null);
   const { toast } = useToast();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm<VerificationFormData>({
+  const { register, handleSubmit, formState: { errors } } = useForm<VerificationFormData>({
     resolver: zodResolver(verificationSchema),
   });
 
-  const verifyMutation = useMutation({
-    mutationFn: async (data: VerificationFormData) => {
-      const response = await apiRequest("POST", "/api/certificates/verify", {
-        certificateNumber: data.certificateNumber,
-        clientName: data.clientName || undefined,
-        clientEmail: data.clientEmail || undefined,
+  const onSubmit = (data: VerificationFormData) => {
+    const found = certificates.find(cert => {
+      const certNumMatch = cert.certificateNumber.toLowerCase() === data.certificateNumber.trim().toLowerCase();
+      const nameMatch = !data.clientName || cert.customerName.toLowerCase() === data.clientName.trim().toLowerCase();
+      const emailMatch = !data.clientEmail || cert.email.toLowerCase() === data.clientEmail.trim().toLowerCase();
+      return certNumMatch && nameMatch && emailMatch;
+    });
+
+    if (found) {
+      const isExpired = new Date(found.expiryDate) < new Date();
+      setVerificationResult({
+        status: isExpired ? "expired" : "valid",
+        certificate: {
+          certificateNumber: found.certificateNumber,
+          clientName: found.customerName,
+          serviceType: found.category,
+          issueDate: found.issueDate,
+          expiryDate: found.expiryDate,
+        },
       });
-      return response.json();
-    },
-    onSuccess: (result) => {
-      setVerificationResult(result);
-      if (result.status === "not_found") {
-        toast({
-          title: "Certificate Not Found",
-          description: "The certificate number you entered could not be found or the details do not match.",
-          variant: "destructive",
-        });
-      }
-    },
-    onError: () => {
+    } else {
+      setVerificationResult({
+        status: "not_found",
+        message: "The certificate number you entered could not be found or details do not match.",
+      });
       toast({
-        title: "Verification Failed",
-        description: "There was an error verifying the certificate. Please try again.",
+        title: "Certificate Not Found",
+        description: "The certificate number you entered could not be found or details do not match.",
         variant: "destructive",
       });
-    },
-  });
-
-  const onSubmit = (data: VerificationFormData) => {
-    verifyMutation.mutate(data);
+    }
   };
 
   return (
@@ -85,7 +81,6 @@ export default function Verification() {
                 <Input
                   id="certificateNumber"
                   {...register("certificateNumber")}
-                  className="professional-input"
                   placeholder="Enter certificate number"
                 />
                 {errors.certificateNumber && (
@@ -101,7 +96,6 @@ export default function Verification() {
                   <Input
                     id="clientName"
                     {...register("clientName")}
-                    className="professional-input"
                     placeholder="Enter client name"
                   />
                 </div>
@@ -113,7 +107,6 @@ export default function Verification() {
                     id="clientEmail"
                     type="email"
                     {...register("clientEmail")}
-                    className="professional-input"
                     placeholder="Enter email address"
                   />
                   {errors.clientEmail && (
@@ -122,47 +115,16 @@ export default function Verification() {
                 </div>
               </div>
 
-              <Button
-                type="submit"
-                disabled={verifyMutation.isPending}
-                className="w-full professional-button"
-              >
+              <Button type="submit" className="w-full flex items-center justify-center">
                 <Search className="mr-2 h-4 w-4" />
-                {verifyMutation.isPending ? "Verifying..." : "Verify Certificate"}
+                Verify Certificate
               </Button>
             </form>
 
-            {verificationResult && (
-              <CertificateResult result={verificationResult} />
-            )}
+            {/* Render certificate result */}
+            {verificationResult && <CertificateResult result={verificationResult} />}
           </CardContent>
         </Card>
-
-        {/* Information Section */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
-          <Card className="border border-gray-200">
-            <CardContent className="p-6">
-              <h3 className="text-lg font-semibold text-black mb-3">How It Works</h3>
-              <ul className="space-y-2 text-gray-600">
-                <li>• Enter your certificate number in the field above</li>
-                <li>• Optionally provide client name or email for additional verification</li>
-                <li>• Click verify to check certificate authenticity and status</li>
-                <li>• View detailed certificate information if found</li>
-              </ul>
-            </CardContent>
-          </Card>
-
-          <Card className="border border-gray-200">
-            <CardContent className="p-6">
-              <h3 className="text-lg font-semibold text-black mb-3">Certificate Status</h3>
-              <ul className="space-y-2 text-gray-600">
-                <li>• <span className="text-green-600 font-medium">Valid:</span> Certificate is authentic and current</li>
-                <li>• <span className="text-yellow-600 font-medium">Expired:</span> Certificate has passed its expiry date</li>
-                <li>• <span className="text-red-600 font-medium">Not Found:</span> Certificate number not in our database</li>
-              </ul>
-            </CardContent>
-          </Card>
-        </div>
       </div>
     </div>
   );

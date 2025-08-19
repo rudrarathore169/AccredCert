@@ -5,11 +5,11 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Calendar, User, ArrowRight } from "lucide-react";
 import type { BlogPost } from "@shared/schema";
+import { useContext } from "react";
+import { AppContext } from "@/Context";
 
 export default function Blog() {
-  const { data: blogPosts, isLoading, error } = useQuery<BlogPost[]>({
-    queryKey: ["/api/blog"],
-  });
+ const {blogs}=useContext(AppContext)
 
   return (
     <div className="min-h-screen py-20 bg-gray-50">
@@ -21,143 +21,47 @@ export default function Blog() {
           </p>
         </div>
 
-        {isLoading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[...Array(6)].map((_, i) => (
-              <Card key={i} className="service-card">
-                <Skeleton className="w-full h-48 rounded-t-xl" />
-                <CardContent className="p-6">
-                  <Skeleton className="h-6 w-3/4 mb-3" />
-                  <Skeleton className="h-4 w-full mb-2" />
-                  <Skeleton className="h-4 w-2/3 mb-4" />
-                  <Skeleton className="h-4 w-24 mb-2" />
-                  <Skeleton className="h-4 w-32" />
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        ) : !blogPosts || blogPosts.length === 0 ? (
+        
           <div className="text-center py-12">
             <p className="text-gray-600 mb-8">
               We're working on creating valuable content for you. Check back soon for the latest insights on compliance and regulations.
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {/* Sample article previews to show what content will look like */}
-              <Card className="service-card">
-                <img 
-                  src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400" 
-                  alt="FDA Compliance Guide"
-                  className="w-full h-48 object-cover rounded-t-xl"
-                />
-                <CardContent className="p-6">
-                  <div className="flex items-center text-sm text-gray-500 mb-3">
-                    <Calendar size={16} className="mr-2" />
-                    <span>Coming Soon</span>
-                  </div>
-                  <h3 className="text-xl font-semibold text-black mb-3">
-                    Complete Guide to FDA Food Facility Registration
-                  </h3>
-                  <p className="text-gray-600 mb-4">
-                    Everything you need to know about FDA food facility registration, including requirements, timelines, and best practices.
-                  </p>
-                  <div className="flex items-center justify-between">
-                    <Badge variant="secondary">FDA Compliance</Badge>
-                    <span className="text-sm text-gray-500">Article coming soon</span>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="service-card">
-                <img 
-                  src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400" 
-                  alt="MoCRA Compliance"
-                  className="w-full h-48 object-cover rounded-t-xl"
-                />
-                <CardContent className="p-6">
-                  <div className="flex items-center text-sm text-gray-500 mb-3">
-                    <Calendar size={16} className="mr-2" />
-                    <span>Coming Soon</span>
-                  </div>
-                  <h3 className="text-xl font-semibold text-black mb-3">
-                    MoCRA Compliance: What Cosmetic Companies Need to Know
-                  </h3>
-                  <p className="text-gray-600 mb-4">
-                    Navigate the new Modernization of Cosmetics Regulation Act requirements and ensure your products comply.
-                  </p>
-                  <div className="flex items-center justify-between">
-                    <Badge variant="secondary">Cosmetics</Badge>
-                    <span className="text-sm text-gray-500">Article coming soon</span>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="service-card">
-                <img 
-                  src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400" 
-                  alt="International Trade"
-                  className="w-full h-48 object-cover rounded-t-xl"
-                />
-                <CardContent className="p-6">
-                  <div className="flex items-center text-sm text-gray-500 mb-3">
-                    <Calendar size={16} className="mr-2" />
-                    <span>Coming Soon</span>
-                  </div>
-                  <h3 className="text-xl font-semibold text-black mb-3">
-                    International Trade Compliance: A Global Perspective
-                  </h3>
-                  <p className="text-gray-600 mb-4">
-                    Understand the complexities of international trade regulations and how to ensure compliance across multiple markets.
-                  </p>
-                  <div className="flex items-center justify-between">
-                    <Badge variant="secondary">Global Trade</Badge>
-                    <span className="text-sm text-gray-500">Article coming soon</span>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
+           
+           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+  {[
+    ...blogs.filter(b => b.status === "Active"),
+    ...blogs.filter(b => b.status === "Coming Soon")
+  ].map((blog, index, arr) => (
+    <div key={blog._id}>
+      <Card className="service-card">
+        <img 
+          src={blog.imageUrl} 
+          alt={blog.title}
+          className="w-full h-48 object-cover rounded-t-xl"
+        />
+        <CardContent className="p-6">
+          <div className="flex items-center text-sm text-gray-500 mb-3">
+            <Calendar size={16} className="mr-2" />
+            <span>{blog.status}</span>
           </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogPosts.map((post) => (
-              <Card key={post.id} className="service-card">
-                {post.imageUrl && (
-                  <img 
-                    src={post.imageUrl} 
-                    alt={post.title}
-                    className="w-full h-48 object-cover rounded-t-xl"
-                  />
-                )}
-                <CardContent className="p-6">
-                  <div className="flex items-center text-sm text-gray-500 mb-3">
-                    <Calendar size={16} className="mr-2" />
-                    <span>{new Date(post.createdAt).toLocaleDateString()}</span>
-                    {post.authorId && (
-                      <>
-                        <span className="mx-2">•</span>
-                        <User size={16} className="mr-1" />
-                        <span>AccredCert Team</span>
-                      </>
-                    )}
-                  </div>
-                  <h3 className="text-xl font-semibold text-black mb-3 line-clamp-2">
-                    {post.title}
-                  </h3>
-                  <p className="text-gray-600 mb-4 line-clamp-3">
-                    {post.excerpt || post.content.substring(0, 150) + "..."}
-                  </p>
-                  <div className="flex items-center justify-between">
-                    <Badge variant="secondary">Compliance</Badge>
-                    <Link href={`/blog/${post.slug}`} className="flex items-center text-blue-600 hover:text-blue-800 font-medium">
-                      Read More
-                      <ArrowRight size={16} className="ml-1" />
-                    </Link>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+          <h3 className="text-xl font-semibold text-black mb-3">
+            {blog.title}
+          </h3>
+          <p className="text-gray-600 mb-4">
+            {blog.description}
+          </p>
+          <div className="flex items-center justify-between">
+            <Badge variant="secondary">{blog.category}</Badge>
+            <span className="text-sm text-gray-500">Article coming soon</span>
           </div>
-        )}
+        </CardContent>
+      </Card>
+    </div>
+  ))}
+</div>
 
+
+          </div>
         {/* Featured Categories */}
         <div className="mt-20">
           <h2 className="text-3xl font-bold text-black text-center mb-12">Article Categories</h2>
