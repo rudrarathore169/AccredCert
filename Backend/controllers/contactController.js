@@ -30,7 +30,7 @@ const contactFormHandler = async (req, res) => {
 
     const mailOptions = {
       from: `"${name}" <${process.env.EMAIL_USER}>`, // fixed sender
-      replyTo: email, // yaha user ka email dalta hai
+      replyTo: email, 
       to:"dhaneshjoshi842@gmail.com",
       subject: subject || "New Contact Message",
       text: message,

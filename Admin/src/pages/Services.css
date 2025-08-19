@@ -44,7 +44,7 @@
 .main-content {
   flex: 1;
   padding: 1rem;
-  overflow-y: auto; /* 👈 scroll yeh deta hai */
+  overflow-y: auto; 
   background: #f9fafb;
 }
 
@@ -109,7 +109,7 @@
 
 .button-group {
   display: flex;
-  gap: 0.5rem;   /* buttons ke beech thoda gap */
+  gap: 0.5rem;   
   margin-top: 0.5rem;
 }
 

@@ -2,7 +2,6 @@ const express = require('express');
 const cors = require('cors'); // <-- added
 const app = express();
 const connectDB = require('./config/db');
-const insertBlogs = require('./insert.js');
 const dotenv = require('dotenv');
 dotenv.config();
 
@@ -19,7 +18,6 @@ app.use('/admin', adminRoutes);
 // DB connect
 connectDB();
 
-// insertBlogs()
 
 // Start server
 app.listen(3000, () => {

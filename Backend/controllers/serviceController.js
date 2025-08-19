@@ -84,7 +84,7 @@ exports.editservice = async (req, res) => {
                 updatedAt,
                 imageUrl
             },
-            { new: true } // ✅ ye ensure karega ke updated document return ho
+            { new: true }
         );
 
         if (!updatedService) {
