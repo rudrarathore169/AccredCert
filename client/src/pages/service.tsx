@@ -1,10 +1,10 @@
 // src/pages/service.tsx
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate,useLocation } from "react-router-dom";
 import axios from "axios";
-
 export default function Service() {  // ✅ default export
-  const { id } = useParams();
+   const location = useLocation();
+  const id = location.state;
   const navigate = useNavigate();
   const [service, setService] = useState(null);
 

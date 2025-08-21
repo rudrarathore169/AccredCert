@@ -26,7 +26,7 @@ export default function ServiceCard({ service }: ServiceCardProps) {
           </span>
          
          <Button
-  onClick={() => navigate(`/service/${service._id || service.id}`)}
+  onClick={() => navigate('/service',{state:service._id})}
   className="professional-button"
 >
   Learn More
