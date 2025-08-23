@@ -59,13 +59,13 @@ export default function Footer() {
               <div className="flex items-start">
                 <MapPin className="mt-1 mr-3 flex-shrink-0" size={16} />
                 <span className="text-sm">
-                  2105 Vista Oeste St NW, Suite E - 1080<br />
-                  Albuquerque, NM 87120
+                  Bahubali Colony, near Bohra Ganesh Temple
+                  Udaipur, Rajasthan 313001
                 </span>
               </div>
               <div className="flex items-center">
                 <Phone className="mr-3 flex-shrink-0" size={16} />
-                <span className="text-sm">+1 (646) 974-6735</span>
+                <span className="text-sm">+91 83026 45259</span>
               </div>
               <div className="flex items-center">
                 <Mail className="mr-3 flex-shrink-0" size={16} />

@@ -105,9 +105,8 @@ export default function Contact() {
                 <div>
                   <h3 className="font-semibold text-black mb-1">Our Location</h3>
                   <p className="text-gray-600">
-                    2105 Vista Oeste St NW,<br />
-                    Suite E - 1080<br />
-                    Albuquerque, NM 87120
+                    Bahubali Colony, near Bohra Ganesh Temple
+                    Udaipur, Rajasthan 313001
                   </p>
                 </div>
               </div>
@@ -118,7 +117,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-black mb-1">Phone</h3>
-                  <p className="text-gray-600">+1 (646) 974-6735</p>
+                  <p className="text-gray-600">+91 83026 45259</p>
                 </div>
               </div>
 
@@ -133,19 +132,20 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* Google Maps Embed */}
-            <div className="rounded-xl overflow-hidden shadow-lg">
-              <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3265.0985775437773!2d-106.71659992500493!3d35.15166607260616!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8718515b66db2b75%3A0x7e8c6c1c8c8c8c8c!2s2105%20Vista%20Oeste%20St%20NW%2C%20Albuquerque%2C%20NM%2087120%2C%20USA!5e0!3m2!1sen!2sus!4v1624567890123" 
-                width="100%" 
-                height="300" 
-                style={{ border: 0 }} 
-                allowFullScreen 
-                loading="lazy" 
-                referrerPolicy="no-referrer-when-downgrade"
-                title="AccredCert Office Location - 2105 Vista Oeste St NW, Albuquerque, NM"
-              />
-            </div>
+            {/* Google Maps Embed for Accredcert */}
+<div className="rounded-xl overflow-hidden shadow-lg">
+  <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3628.0381782254467!2d73.7233517!3d24.587878599999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x83e56c40fb6e4963%3A0xa2741b19d7795ef!2sAccredcert!5e0!3m2!1sen!2sin!4v1755704541788!5m2!1sen!2sin"
+    width="100%"
+    height="300"
+    style={{ border: 0 }}
+    allowFullScreen
+    loading="lazy"
+    referrerPolicy="no-referrer-when-downgrade"
+    title="Accredcert Location - Udaipur"
+  />
+</div>
+
           </div>
 
           {/* Contact Form and File Upload */}
